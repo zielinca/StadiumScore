@@ -6,13 +6,32 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5F16A33C2F99773700059818 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5F16A33B2F99773700059818 /* FirebaseAuth */; };
+		5F16A33E2F99773700059818 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5F16A33D2F99773700059818 /* FirebaseFirestore */; };
+		5F16A3402F99773700059818 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5F16A33F2F99773700059818 /* FirebaseStorage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		5F9CF2032F99275400F20A15 /* StadiumScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StadiumScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5F16A3442F997D3200059818 /* Exceptions for "StadiumScore" folder in "StadiumScore" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 5F9CF2022F99275400F20A15 /* StadiumScore */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5F9CF2052F99275400F20A15 /* StadiumScore */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5F16A3442F997D3200059818 /* Exceptions for "StadiumScore" folder in "StadiumScore" target */,
+			);
 			path = StadiumScore;
 			sourceTree = "<group>";
 		};
@@ -23,6 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F16A33C2F99773700059818 /* FirebaseAuth in Frameworks */,
+				5F16A33E2F99773700059818 /* FirebaseFirestore in Frameworks */,
+				5F16A3402F99773700059818 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +87,9 @@
 			);
 			name = StadiumScore;
 			packageProductDependencies = (
+				5F16A33B2F99773700059818 /* FirebaseAuth */,
+				5F16A33D2F99773700059818 /* FirebaseFirestore */,
+				5F16A33F2F99773700059818 /* FirebaseStorage */,
 			);
 			productName = StadiumScore;
 			productReference = 5F9CF2032F99275400F20A15 /* StadiumScore.app */;
@@ -94,6 +119,9 @@
 			);
 			mainGroup = 5F9CF1FA2F99275400F20A15;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5F16A33A2F99773700059818 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5F9CF2042F99275400F20A15 /* Products */;
 			projectDirPath = "";
@@ -256,9 +284,9 @@
 				DEVELOPMENT_TEAM = RKS39RF6AT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StadiumScore/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -288,9 +316,9 @@
 				DEVELOPMENT_TEAM = RKS39RF6AT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StadiumScore/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -332,6 +360,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5F16A33A2F99773700059818 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.12.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5F16A33B2F99773700059818 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F16A33A2F99773700059818 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		5F16A33D2F99773700059818 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F16A33A2F99773700059818 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		5F16A33F2F99773700059818 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F16A33A2F99773700059818 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5F9CF1FB2F99275400F20A15 /* Project object */;
 }
