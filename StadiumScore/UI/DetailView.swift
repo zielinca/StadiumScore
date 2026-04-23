@@ -8,10 +8,6 @@
 import SwiftUI
 import PhotosUI
 
-// TODO: maybe UI format (Overview, Rating, Thoughts / Baseball Diary, Own Users Pictures
-// TODO: add number of times visited (have you been there more than once? if yes, estimate how many times have you been there?)
-// TODO: maybe, the rating should be a sheet presented (after asking how many times have you been there, when did you go, what was the game
-
 struct DetailView: View {
     let stadium: Stadium
     let onSave: () -> Void // TODO: AI added

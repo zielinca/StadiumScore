@@ -24,7 +24,7 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            Image("logo") // TODO: change this to my own logo
+            Image("logo")
                 .resizable()
                 .scaledToFit()
                 .padding(.bottom, 20)
