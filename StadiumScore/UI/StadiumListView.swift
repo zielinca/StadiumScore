@@ -11,6 +11,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 //TODO: need to fix launchscreen
+//TESTING COMMIT & PUSH
 
 struct StadiumListView: View {
     @State private var stadiumViewModel = StadiumViewModel()
