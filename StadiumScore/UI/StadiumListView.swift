@@ -79,6 +79,16 @@ struct StadiumListView: View {
                         }
                     }
                 }
+                ToolbarItem(placement: .bottomBar) {
+                    NavigationLink {
+                        StadiumMapView(stadiums: stadiumViewModel.stadiumsArray, stadiumRatings: stadiumRatings)
+                    } label: {
+                        HStack{
+                            Text(" Map View ")
+                            Image(systemName: "map")
+                        }
+                    }
+                }
             }
         }
         .task {
