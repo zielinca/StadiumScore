@@ -11,7 +11,6 @@ import FirebaseAuth
 import FirebaseFirestore
 
 //TODO: need to fix launchscreen
-//TODO: add a toolbar to open a map view (?) see Sutt's app
 
 struct StadiumListView: View {
     @State private var stadiumViewModel = StadiumViewModel()
