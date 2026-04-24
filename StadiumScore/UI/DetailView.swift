@@ -14,6 +14,7 @@ struct DetailView: View {
     @State private var hasVisited = false
     @Environment(\.dismiss) private var dismiss
     
+    // Slider Ratings
     @State private var locationRating: Double = 0
     @State private var foodRating: Double = 0
     @State private var atmosphereRating: Double = 0
@@ -22,6 +23,7 @@ struct DetailView: View {
     @State private var accessibilityRating: Double = 0
     @State private var uniqueRating: Double = 0
     
+    // Additional Information Variables
     @State private var notes: String = ""
     @State private var price: Double = 0.0
     @State private var lastVisited: Int = Calendar.current.component(.year, from: Date())
@@ -29,12 +31,14 @@ struct DetailView: View {
     
     @State private var originalRatingsLoaded = false
     
-    var overallRating: Double? { // TODO: AI generated, might need to explain
+    // Overall Rating Variable (if user hasVisited)
+    var overallRating: Double? {
         guard hasVisited else { return nil }
         
         return (locationRating + foodRating + atmosphereRating + amenityRating + prepostRating + uniqueRating + accessibilityRating) / 5.0
     }
     
+    // Photo Variables
     @State private var photos: [Photo] = []
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var photoData: Data?
@@ -43,7 +47,6 @@ struct DetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                
                 // MARK: Stadium Image
                 AsyncImage(url: URL(string: stadium.stadiumImage)) { image in
                     image
@@ -56,7 +59,7 @@ struct DetailView: View {
                 } placeholder: {
                     ProgressView()
                         .frame(height: 220)
-                    // TODO: update progressView(s)
+                        .tint(.red)
                 }
                 
                 // MARK: Stadium Name
@@ -64,16 +67,16 @@ struct DetailView: View {
                     .font(.largeTitle)
                     .bold()
                     .multilineTextAlignment(.center)
-                    .padding(.bottom, 8) // TODO: double check padding(s)
+                    .padding(.bottom, 8)
                 
                 // MARK: Subheader
                 Text("Home of the")
                     .font(.headline)
                     .foregroundColor(.secondary)
                 
-                // MARK: Team Section
+                // MARK: Team Section (Logo & Team Name)
                 HStack{
-                    VStack() {
+                    VStack {
                         AsyncImage(url: URL(string: stadium.logo)) { image in
                             image
                                 .resizable()
@@ -82,8 +85,8 @@ struct DetailView: View {
                         } placeholder: {
                             ProgressView()
                                 .frame(width: 100, height: 100)
+                                .tint(.red)
                         }
-                        
                         Text(stadium.team)
                             .font(.title2)
                             .bold()
@@ -91,7 +94,7 @@ struct DetailView: View {
                     }
                 }
                 
-                // MARK: Info Section
+                // MARK: Stadium Info Section
                 VStack(spacing: 6) {
                     Text("Opened: \(String(stadium.opened))")
                     Text("Capacity: \(stadium.capacity)")
@@ -103,9 +106,6 @@ struct DetailView: View {
                 Divider()
                     .padding(.horizontal)
                     .padding(.top, 8)
-                
-                // TODO: MapView Button! At bottom of ListView (toolbar)
-                // TODO: maybe allow user to add pictures from their experience!
                 
                 // MARK: Toggle (Yes/No) Attendance Section
                 HStack (spacing: 4) {
@@ -137,6 +137,7 @@ struct DetailView: View {
                         .padding(.horizontal)
                         .padding(.bottom, 8)
                     
+                    // MARK: Ratings!
                     VStack(spacing: 16) {
                         ratingRow(title: "Atmosphere (0–10)", value: $atmosphereRating)
                         ratingRow(title: "Stadium Amenities (0–10)", value: $amenityRating)
@@ -149,6 +150,7 @@ struct DetailView: View {
                     .padding(.horizontal)
                 }
                 
+                // MARK: Overall Rating
                 if hasVisited, let rating = overallRating {
                     VStack(spacing: 6) {
                         Text("Overall Rating")
@@ -237,8 +239,6 @@ struct DetailView: View {
                         .padding(.bottom, 16)
                     
                     // MARK: Photos Section
-                    // TODO: add my photos to the simulator
-                    
                     HStack {
                         Spacer()
                         
@@ -264,6 +264,7 @@ struct DetailView: View {
                                     .cornerRadius(12)
                             } placeholder: {
                                 ProgressView()
+                                    .tint(.red)
                             }
                             .frame(maxWidth: .infinity)
                             
@@ -286,7 +287,7 @@ struct DetailView: View {
                         .padding(.horizontal)
                     }
                 }
-            } // End of VStack
+            }
         }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -336,7 +337,7 @@ struct DetailView: View {
     }
     
     
-    // TODO: here and below need AI explanation for how this all works
+    // TODO: need AI explanation; binding varaible, ViewBuilding Function (DRY)
     @ViewBuilder
     func ratingRow(title: String, value: Binding<Double>, maxValue: Double = 10) -> some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -408,16 +409,15 @@ struct DetailView: View {
             lastVisited: lastVisited,
             visitedMultipleTimes: visitedMultipleTimes
         )
-        
         onSave()
     }
     
-    func cancelChanges() { // TODO: find out what this is doing?
+    func cancelChanges() { // TODO: understand the purpose of this
         loadRatings()
     }
 }
 
 #Preview {
     DetailView(stadium: Stadium(team: "Atlanta Braves", stadium: "Truist Park", latitude: 33.8907, longitude: -84.4677, capacity: 41084, opened: 2017, logo: "https://dejpknyizje2n.cloudfront.net/media/carstickers/versions/atlanta-braves-mlb-logo-sticker-u3c2e-120b-x418.png", stadiumImage: "https://img.mlbstatic.com/mlb-images/image/private/t_16x9/t_w2208/mlb/vploiziye2gmvm1l9n0j.jpg"), onSave: {})
-    //TODO: AI added the onSave: {}
+    //TODO: AI added the onSave: {}, why needed?
 }

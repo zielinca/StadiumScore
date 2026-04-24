@@ -13,7 +13,7 @@ struct StadiumRatingStore {
     
     static let db = Firestore.firestore()
     
-    // MARK: SAVE
+    // MARK: SAVE FUNCTION
     static func save(
         stadiumId: String,
         hasVisited: Bool,
@@ -35,6 +35,8 @@ struct StadiumRatingStore {
         }
         
         let db = Firestore.firestore()
+        
+        // TODO: AI Explain, what this code below is doing!
         
         db.collection("users")
             .document(userId)
@@ -59,39 +61,37 @@ struct StadiumRatingStore {
     }
     
     // MARK: LOAD
-    static func load(
-        stadiumId: String,
-        completion: @escaping ([String: Any]) -> Void  // ← Any, not Double
-    ) {
+    static func load(stadiumId: String, completion: @escaping ([String: Any]) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("❌ No logged in user")
             return
         }
         
+        // TODO: need explanation for what this code is doing below (AI)
         db.collection("users")
             .document(userId)
             .collection("ratings")
             .document(stadiumId)
             .getDocument { snapshot, error in
-                
                 guard let data = snapshot?.data(), error == nil else {
                     completion([:])
                     return
                 }
                 
-                var result: [String: Any] = [:]  // ← Any
                 
-                result["hasVisited"] = data["hasVisited"] as? Bool ?? false  // ← add this
-                result["location"]   = data["location"]   as? Double ?? 0
-                result["food"]       = data["food"]        as? Double ?? 0
-                result["atmosphere"] = data["atmosphere"]  as? Double ?? 0
-                result["amenities"]       = data["amenities"]        as? Double ?? 0
-                result["accessibility"]       = data["accessibility"]        as? Double ?? 0
-                result["prepost"]    = data["prepost"]     as? Double ?? 0
-                result["unique"]     = data["unique"]      as? Double ?? 0
-                result["notes"]               = data["notes"]               as? String ?? ""
-                result["price"]               = data["price"]               as? Double ?? 0.0
-                result["lastVisited"]         = data["lastVisited"]         as? Int    ?? Calendar.current.component(.year, from: Date())
+                var result: [String: Any] = [:]
+                
+                result["hasVisited"] = data["hasVisited"] as? Bool ?? false
+                result["location"] = data["location"] as? Double ?? 0
+                result["food"] = data["food"] as? Double ?? 0
+                result["atmosphere"] = data["atmosphere"] as? Double ?? 0
+                result["amenities"] = data["amenities"] as? Double ?? 0
+                result["accessibility"] = data["accessibility"] as? Double ?? 0
+                result["prepost"] = data["prepost"] as? Double ?? 0
+                result["unique"] = data["unique"] as? Double ?? 0
+                result["notes"] = data["notes"] as? String ?? ""
+                result["price"] = data["price"] as? Double ?? 0.0
+                result["lastVisited"] = data["lastVisited"] as? Int ?? Calendar.current.component(.year, from: Date())
                 result["visitedMultipleTimes"] = data["visitedMultipleTimes"] as? Bool ?? false
                 
                 completion(result)

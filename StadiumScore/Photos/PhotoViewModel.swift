@@ -87,7 +87,7 @@ class PhotoViewModel {
         let storage = Storage.storage().reference()
 
         do {
-            // 1. delete from Firestore
+            // delete from Firestore
             try await db.collection("users")
                 .document(userId)
                 .collection("ratings")
@@ -96,7 +96,7 @@ class PhotoViewModel {
                 .document(photoId)
                 .delete()
 
-            // 2. delete from Storage
+            // delete from Storage
             let path = "\(stadiumId)/\(photoId)"
             try await storage.child(path).delete()
 
@@ -106,6 +106,8 @@ class PhotoViewModel {
     }
     
     static func deleteAllPhotos(stadiumId: String) async {
+        // do this when user untoggles hasVisited; resets entire Stadium DetailView
+        
         guard let userId = Auth.auth().currentUser?.uid else { return }
 
         let db = Firestore.firestore()

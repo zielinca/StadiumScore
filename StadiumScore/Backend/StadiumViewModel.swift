@@ -12,7 +12,6 @@ import Foundation
 class StadiumViewModel {
     private struct Returned: Codable {
         var count: Int
-//        var next: String? TODO: check if this is needed
         var results: [Stadium]
     }
     

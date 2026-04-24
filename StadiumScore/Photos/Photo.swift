@@ -24,16 +24,3 @@ struct Photo: Identifiable, Codable {
         self.postedOn = postedOn
     }
 }
-
-extension Photo {
-    static var preview: Photo {
-        let newPhoto = Photo(
-            id: "1",
-            imageURLString: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Pizza-3007395.jpg/330px-Pizza-3007395.jpg",
-            description: "Yummy Pizza",
-            reviewer: "little@caesars.com",
-            postedOn: Date()
-        )
-        return newPhoto
-    }
-}

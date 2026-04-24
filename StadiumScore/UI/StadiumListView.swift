@@ -11,11 +11,10 @@ import FirebaseAuth
 import FirebaseFirestore
 
 //TODO: need to fix launchscreen
-//TESTING COMMIT & PUSH
 
 struct StadiumListView: View {
     @State private var stadiumViewModel = StadiumViewModel()
-    @State private var stadiumRatings: [String: Double] = [:] // TODO: used AI here, is this a dictionary?
+    @State private var stadiumRatings: [String: Double] = [:] // TODO: used AI here, what is this variable and what is accomplishing?
     @Environment(\.dismiss) private var dismiss
     var visitedStadiums: [Stadium] {
         stadiumViewModel.stadiumsArray
@@ -25,6 +24,7 @@ struct StadiumListView: View {
             }
     }
     
+    // creating array of notVisitedStadiums if no ratings input / not toggled
     var notVisitedStadiums: [Stadium] {
         stadiumViewModel.stadiumsArray
             .filter { stadiumRatings[$0.id] == nil }
@@ -35,6 +35,8 @@ struct StadiumListView: View {
             ZStack {
                 List {
                     if !visitedStadiums.isEmpty {
+                        
+                        // TODO: AI suggested Section
                         Section("Visited (\(visitedStadiums.count))") {
                             ForEach(visitedStadiums) { stadium in
                                 let rank = rankForStadium(stadium, in: visitedStadiums)
@@ -64,10 +66,10 @@ struct StadiumListView: View {
                 if stadiumViewModel.isLoading {
                     ProgressView()
                         .tint(.red)
-                        .scaleEffect(4)
                 }
             }
             .toolbar{
+                // MARK: Sign Out Button
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Sign Out") {
                         do {
@@ -79,6 +81,7 @@ struct StadiumListView: View {
                         }
                     }
                 }
+                // MARK: Map View Button
                 ToolbarItem(placement: .bottomBar) {
                     NavigationLink {
                         StadiumMapView(stadiums: stadiumViewModel.stadiumsArray, stadiumRatings: stadiumRatings)
@@ -96,7 +99,7 @@ struct StadiumListView: View {
             loadVisitedStadiums()
         }
         .onAppear {
-            loadVisitedStadiums() // TODO: check if needed / treatment
+            loadVisitedStadiums()
         }
     }
     
@@ -168,6 +171,7 @@ struct StadiumListView: View {
             } placeholder: {
                 ProgressView()
                     .frame(width: 40, height: 40)
+                    .tint(.red)
             }
             Text(stadium.stadium)
                 .font(.title2)
@@ -192,12 +196,13 @@ struct StadiumListView: View {
         .multilineTextAlignment(.leading)
     }
     
-    func rankText(rank: Int, stadium: Stadium) -> String { // TODO: changed this to have tie logic, make sure it functions properly and makes sense!
+    func rankText(rank: Int, stadium: Stadium) -> String {
         let currentRating = stadiumRatings[stadium.id] ?? 0
         
         // Count how many have SAME rating
         let tieCount = stadiumRatings.values.filter { $0 == currentRating }.count
         
+        // If exact ties occur
         if tieCount > 1 {
             switch rank {
             case 1: return "🥇"

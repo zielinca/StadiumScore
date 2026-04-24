@@ -8,8 +8,7 @@
 import Foundation
 
 struct Stadium: Codable, Identifiable {
-    //    let id = UUID().uuidString
-    var id: String {
+    var id: String { // TODO: AI explanation for why this instead of let id = UUID.uuidString()
         stadium.replacingOccurrences(of: " ", with: "_")
     }
     var team: String
@@ -20,7 +19,6 @@ struct Stadium: Codable, Identifiable {
     var opened: Int
     var logo: String
     var stadiumImage: String
-    //TODO: maybe add, city, state
     
     enum CodingKeys: String, CodingKey {
         case team
@@ -31,6 +29,5 @@ struct Stadium: Codable, Identifiable {
         case opened
         case logo
         case stadiumImage
-        //TODO: maybe add, city, state
     }
 }
