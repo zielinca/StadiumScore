@@ -36,8 +36,7 @@ struct StadiumRatingStore {
         
         let db = Firestore.firestore()
         
-        // TODO: AI Explain, what this code below is doing!
-        
+        // MARK: AI Video Explanation
         db.collection("users")
             .document(userId)
             .collection("ratings")
@@ -67,7 +66,7 @@ struct StadiumRatingStore {
             return
         }
         
-        // TODO: need explanation for what this code is doing below (AI)
+        // MARK: AI Video Explanation
         db.collection("users")
             .document(userId)
             .collection("ratings")

@@ -8,7 +8,7 @@
 import Foundation
 
 struct Stadium: Codable, Identifiable {
-    var id: String { // TODO: AI explanation for why this instead of let id = UUID.uuidString()
+    var id: String { // MARK: AI Video Explanation
         stadium.replacingOccurrences(of: " ", with: "_")
     }
     var team: String

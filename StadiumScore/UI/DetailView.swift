@@ -10,7 +10,7 @@ import PhotosUI
 
 struct DetailView: View {
     let stadium: Stadium
-    let onSave: () -> Void // TODO: AI added
+    let onSave: () -> Void // MARK: AI suggestion
     @State private var hasVisited = false
     @Environment(\.dismiss) private var dismiss
     
@@ -75,23 +75,21 @@ struct DetailView: View {
                     .foregroundColor(.secondary)
                 
                 // MARK: Team Section (Logo & Team Name)
-                HStack{
-                    VStack {
-                        AsyncImage(url: URL(string: stadium.logo)) { image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
-                        } placeholder: {
-                            ProgressView()
-                                .frame(width: 100, height: 100)
-                                .tint(.red)
-                        }
-                        Text(stadium.team)
-                            .font(.title2)
-                            .bold()
-                            .padding(.bottom, 8)
+                VStack {
+                    AsyncImage(url: URL(string: stadium.logo)) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 100)
+                    } placeholder: {
+                        ProgressView()
+                            .frame(width: 100, height: 100)
+                            .tint(.red)
                     }
+                    Text(stadium.team)
+                        .font(.title2)
+                        .bold()
+                        .padding(.bottom, 8)
                 }
                 
                 // MARK: Stadium Info Section
@@ -268,6 +266,7 @@ struct DetailView: View {
                             }
                             .frame(maxWidth: .infinity)
                             
+                            // Individually delete photos within a stadium
                             Button(role: .destructive) {
                                 Task {
                                     await PhotoViewModel.deletePhoto(stadiumId: stadium.id, photo: photo)
@@ -289,6 +288,8 @@ struct DetailView: View {
                 }
             }
         }
+        
+        // MARK: Cancel & Save Buttons
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button("Cancel") {
@@ -337,7 +338,7 @@ struct DetailView: View {
     }
     
     
-    // TODO: need AI explanation; binding varaible, ViewBuilding Function (DRY)
+    // MARK: AI video explanation; @ViewBuilding Function (DRY)
     @ViewBuilder
     func ratingRow(title: String, value: Binding<Double>, maxValue: Double = 10) -> some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -352,7 +353,7 @@ struct DetailView: View {
         }
     }
     
-    //TODO: need to be able to explain what this is doing
+    // MARK: AI Video Explanation
     func loadRatings() {
         StadiumRatingStore.load(stadiumId: stadium.id) { data in
             locationRating = data["location"] as? Double ?? 0
@@ -370,7 +371,7 @@ struct DetailView: View {
         }
     }
     
-    //TODO: need to be able to explain what this is doing
+    // MARK: AI Video Explanation
     func saveChanges() {
         if !hasVisited {
             locationRating = 0
@@ -412,12 +413,11 @@ struct DetailView: View {
         onSave()
     }
     
-    func cancelChanges() { // TODO: understand the purpose of this
+    func cancelChanges() { // MARK: AI video explanation
         loadRatings()
     }
 }
 
 #Preview {
     DetailView(stadium: Stadium(team: "Atlanta Braves", stadium: "Truist Park", latitude: 33.8907, longitude: -84.4677, capacity: 41084, opened: 2017, logo: "https://dejpknyizje2n.cloudfront.net/media/carstickers/versions/atlanta-braves-mlb-logo-sticker-u3c2e-120b-x418.png", stadiumImage: "https://img.mlbstatic.com/mlb-images/image/private/t_16x9/t_w2208/mlb/vploiziye2gmvm1l9n0j.jpg"), onSave: {})
-    //TODO: AI added the onSave: {}, why needed?
 }

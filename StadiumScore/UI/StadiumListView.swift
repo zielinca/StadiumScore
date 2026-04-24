@@ -14,7 +14,7 @@ import FirebaseFirestore
 
 struct StadiumListView: View {
     @State private var stadiumViewModel = StadiumViewModel()
-    @State private var stadiumRatings: [String: Double] = [:] // TODO: used AI here, what is this variable and what is accomplishing?
+    @State private var stadiumRatings: [String: Double] = [:] // MARK: AI video explanation
     @Environment(\.dismiss) private var dismiss
     var visitedStadiums: [Stadium] {
         stadiumViewModel.stadiumsArray
@@ -36,7 +36,7 @@ struct StadiumListView: View {
                 List {
                     if !visitedStadiums.isEmpty {
                         
-                        // TODO: AI suggested Section
+                        // MARK: AI Suggested Section
                         Section("Visited (\(visitedStadiums.count))") {
                             ForEach(visitedStadiums) { stadium in
                                 let rank = rankForStadium(stadium, in: visitedStadiums)
@@ -53,7 +53,7 @@ struct StadiumListView: View {
                     Section("Not Visited (\(notVisitedStadiums.count))") {
                         ForEach(notVisitedStadiums) { stadium in
                             NavigationLink {
-                                DetailView(stadium: stadium, onSave: loadVisitedStadiums) // TODO: AI added the onSave
+                                DetailView(stadium: stadium, onSave: loadVisitedStadiums) // MARK: AI suggested adding the onSave
                             } label: {
                                 stadiumRow(stadium: stadium)
                             }
@@ -106,16 +106,16 @@ struct StadiumListView: View {
     func loadVisitedStadiums() {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         
-        Firestore.firestore() // TODO: explain by AI!
+        Firestore.firestore() // MARK: AI video explanation
             .collection("users")
             .document(userId)
             .collection("ratings")
             .getDocuments { snapshot, error in
                 guard let docs = snapshot?.documents, error == nil else {return}
                 
-                var tempRatings: [String: Double] = [:] // TODO: ai explain!
+                var tempRatings: [String: Double] = [:] // MARK: AI video explanation
                 
-                for doc in docs { // TODO: ai explain!
+                for doc in docs { // MARK: AI video explanation
                     let data = doc.data()
                     let hasVisited = data["hasVisited"] as? Bool ?? false
                     
@@ -149,7 +149,7 @@ struct StadiumListView: View {
             }
     }
     
-    func rankForStadium(_ stadium: Stadium, in sorted: [Stadium]) -> Int { // TODO: need to understand what is happening here! AI logic!
+    func rankForStadium(_ stadium: Stadium, in sorted: [Stadium]) -> Int {
         guard let currentRating = stadiumRatings[stadium.id] else { return 0 }
         
         // Count how many stadiums have a strictly higher rating
@@ -160,7 +160,7 @@ struct StadiumListView: View {
         return higherCount + 1
     }
     
-    @ViewBuilder // TODO: used AI, check if @ViewBuilder needed, explain how I learned this / what it taught
+    @ViewBuilder // MARK: AI Video: @ViewBuilder Explanation
     func stadiumRow(stadium: Stadium, rank: Int? = nil) -> some View {
         HStack {
             AsyncImage(url: URL(string: stadium.logo)) { image in

@@ -15,7 +15,9 @@ class StadiumViewModel {
         var results: [Stadium]
     }
     
-    var urlString: String { // TODO: AI suggestion, allows me to make changes to the JSON, and then Xcode won't used cached data
+    var urlString: String { // MARK: AI video explanation
+        // AI: cacheBust --> app might serve a previously saved copy of my JSON file; instead of fetching latest version by GitHub
+        // AI cont: cacheBust makes every request look like a brand new URL, so the cache never matches it and is forced to fetch fresh data every time
         "https://zielinca.github.io/mlb-stadium-api/stadium.json?cacheBust=\(Date().timeIntervalSince1970)"
     }
     var count = 0

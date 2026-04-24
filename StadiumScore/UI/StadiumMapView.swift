@@ -10,7 +10,7 @@ import MapKit
 
 struct StadiumMapView: View {
     let stadiums: [Stadium]
-    let stadiumRatings: [String: Double] // TODO: AI explain what this is, and why it is needed
+    let stadiumRatings: [String: Double] // MARK: AI taught
 
     @State private var position: MapCameraPosition = .region(
         MKCoordinateRegion(
@@ -21,12 +21,10 @@ struct StadiumMapView: View {
 
     var body: some View {
         Map(position: $position) {
-
             ForEach(stadiums) { stadium in
-                
                 let isVisited = stadiumRatings[stadium.id] != nil
                 
-                // Annotates Stadium Name, (as you zoom in on closing if multiple stadiums close to each other)
+                // MARK: AI taught: Annotates Stadium Name, (as you zoom in on closing if multiple stadiums close to each other)
                 Annotation(stadium.stadium, coordinate: CLLocationCoordinate2D(
                     latitude: stadium.latitude,
                     longitude: stadium.longitude

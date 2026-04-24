@@ -107,7 +107,6 @@ class PhotoViewModel {
     
     static func deleteAllPhotos(stadiumId: String) async {
         // do this when user untoggles hasVisited; resets entire Stadium DetailView
-        
         guard let userId = Auth.auth().currentUser?.uid else { return }
 
         let db = Firestore.firestore()
