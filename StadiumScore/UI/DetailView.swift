@@ -52,15 +52,16 @@ struct DetailView: View {
                     image
                         .resizable()
                         .scaledToFill()
-                        .frame(height: 220)
+                        .frame(maxWidth: .infinity, maxHeight: 220)
                         .clipped()
                         .cornerRadius(16)
-                        .padding(.horizontal)
                 } placeholder: {
                     ProgressView()
                         .frame(height: 220)
                         .tint(.red)
                 }
+                .padding(.horizontal, 16)
+                .clipped()
                 
                 // MARK: Stadium Name
                 Text(stadium.stadium)
