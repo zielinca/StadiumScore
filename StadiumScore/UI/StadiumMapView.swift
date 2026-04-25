@@ -28,7 +28,7 @@ struct StadiumMapView: View {
                 Annotation(stadium.stadium, coordinate: CLLocationCoordinate2D(
                     latitude: stadium.latitude,
                     longitude: stadium.longitude
-                )) {
+                ), anchor: .bottom) {
                     NavigationLink {
                         DetailView(stadium: stadium, onSave: {})
                     } label: {
