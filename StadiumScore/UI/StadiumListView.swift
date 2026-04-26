@@ -10,7 +10,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-//TODO: need to fix launchscreen
+// TESTING FINAL SUBMISSION ON GITHUB
 
 struct StadiumListView: View {
     @State private var stadiumViewModel = StadiumViewModel()
