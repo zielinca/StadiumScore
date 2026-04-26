@@ -23,7 +23,6 @@ struct StadiumMapView: View {
         Map(position: $position) {
             ForEach(stadiums) { stadium in
                 let isVisited = stadiumRatings[stadium.id] != nil
-                
                 // MARK: AI taught: Annotates Stadium Name, (as you zoom in on closing if multiple stadiums close to each other)
                 Annotation(stadium.stadium, coordinate: CLLocationCoordinate2D(
                     latitude: stadium.latitude,

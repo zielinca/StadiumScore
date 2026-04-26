@@ -81,14 +81,16 @@ struct LoginView: View {
         .alert(alertMessage, isPresented: $showingAlert) {
             Button("OK", role: .cancel) { }
         }
-        .onAppear() {
+        .onAppear {
             if Auth.auth().currentUser != nil { // if we're logged in...
                 print("🪵 Log in successful!")
                 presentSheet = true
             }
+            email = ""
+            password = ""
         }
         .fullScreenCover(isPresented: $presentSheet) {
-            StadiumListView()
+            StadiumListView(email: $email, password: $password)
         }
     }
     

@@ -16,6 +16,10 @@ struct StadiumListView: View {
     @State private var stadiumViewModel = StadiumViewModel()
     @State private var stadiumRatings: [String: Double] = [:] // MARK: AI video explanation
     @Environment(\.dismiss) private var dismiss
+    
+    @Binding var email: String
+    @Binding var password: String
+
     var visitedStadiums: [Stadium] {
         stadiumViewModel.stadiumsArray
             .filter { stadiumRatings[$0.id] != nil }
@@ -75,6 +79,8 @@ struct StadiumListView: View {
                         do {
                             try Auth.auth().signOut()
                             print("🪵➡️ Log out successful!")
+                            email = ""
+                            password = ""
                             dismiss()
                         } catch {
                             print("😡 ERROR: Could not sign out!")
@@ -222,5 +228,5 @@ struct StadiumListView: View {
 }
 
 #Preview {
-    StadiumListView()
+    StadiumListView(email: .constant(""), password: .constant(""))
 }

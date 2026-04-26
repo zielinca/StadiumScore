@@ -13,6 +13,7 @@ struct DetailView: View {
     let onSave: () -> Void // MARK: AI suggestion
     @State private var hasVisited = false
     @Environment(\.dismiss) private var dismiss
+    @FocusState private var focusedField: Bool
     
     // Slider Ratings
     @State private var locationRating: Double = 0
@@ -183,6 +184,17 @@ struct DetailView: View {
                             TextField("Your thoughts...", text: $notes, axis: .vertical)
                                 .textFieldStyle(.roundedBorder)
                                 .lineLimit(3)
+                                .focused($focusedField)
+                                .submitLabel(.done)
+                                .onSubmit {
+                                    focusedField = false
+                                }
+                                .onChange(of: notes) {
+                                    if notes.contains("\n") {
+                                        notes = notes.replacingOccurrences(of: "\n", with: "")
+                                        focusedField = false
+                                    }
+                                }
                         }
                         
                         HStack {
@@ -191,11 +203,14 @@ struct DetailView: View {
                             
                             Spacer()
                             
-                            TextField("", value: $price, format: .currency(code: "USD"))
+                            Text("$")
+                            TextField("", value: $price, format: .number)
                                 .textFieldStyle(.roundedBorder)
                                 .keyboardType(.decimalPad)
                                 .frame(width: 100)
+                                .focused($focusedField)
                         }
+                        
                         HStack {
                             Text("Attended Multiple Games?")
                                 .font(.headline)
@@ -289,6 +304,10 @@ struct DetailView: View {
                 }
             }
         }
+        .scrollDismissesKeyboard(.immediately)
+            .onTapGesture {
+                focusedField = false
+            }
         
         // MARK: Cancel & Save Buttons
         .toolbar {
