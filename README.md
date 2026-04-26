@@ -18,7 +18,8 @@ StadiumScore is an MLB stadium-rating app that lets users track the ballparks th
 
 StadiumScore utilizes an API/JSON file I created: https://zielinca.github.io/mlb-stadium-api/stadium.json
 
-Screenshots: <img width="460" height="904" alt="Screenshot 2026-04-26 at 1 14 32 PM" src="https://github.com/user-attachments/assets/896b1016-815e-4438-aeb4-5df4f042857e" />
+Screenshots: 
+<img width="460" height="904" alt="Screenshot 2026-04-26 at 1 14 32 PM" src="https://github.com/user-attachments/assets/896b1016-815e-4438-aeb4-5df4f042857e" />
 <img width="432" height="888" alt="Screenshot 2026-04-26 at 1 14 52 PM" src="https://github.com/user-attachments/assets/5cbd0a91-df9c-438a-9022-62fd75a78420" />
 <img width="438" height="884" alt="Screenshot 2026-04-26 at 1 14 13 PM" src="https://github.com/user-attachments/assets/e5ee2ed7-f90d-4f9e-9a28-90803cb8b5e4" />
 <img width="426" height="878" alt="Screenshot 2026-04-26 at 1 13 55 PM" src="https://github.com/user-attachments/assets/6e018594-7f16-4b7c-8e59-06879192b42a" />
